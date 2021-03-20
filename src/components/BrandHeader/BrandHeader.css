@@ -4,10 +4,6 @@ header{
   align-items: center;
   margin: 0px;
   padding: 0.8rem;
-  background-color:#cbe5f6;
+  background-color: #000;
   color: #fff;
-}
-
-.logo{
-  background-image: url('../../assets/logo.png');
 }
