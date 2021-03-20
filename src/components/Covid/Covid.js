@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import CardSmall from "../Cards/CardSmall";
+import CardSmall from "./../Cards/Card";
 import CardPrincipal from "./../Cards/CardPrincipal";
 import getCountryCodeTotal from './CovidApi';
 import Form from "./../Forms/Form";
@@ -97,7 +97,7 @@ function Covid (){
       </section>
 
       <section class="h-screen">
-        <CardPrincipal title="Panorama Actual" dataInfectados={[300]} dataMuertes={[200]} dataRecuperados={[75]} dataActivos={[420]}></CardPrincipal>
+        <CardPrincipal title="Panorama Actual"></CardPrincipal>
       </section>
       
       <section class="flex justify-center items-center">
@@ -106,16 +106,16 @@ function Covid (){
 
       <section class="grid grid-cols-1 md:grid-cols-2 align-center justify-center">
         <div class="flex justify-center items-center">
-          <CardSmall title="Confirmados" class="col-span-1 m-auto" hoy={[300]} ayer={[200]} antier={[150]}></CardSmall>
+          <CardSmall title="Confirmados" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Activos" class="col-span-1 m-auto" hoy={[400]} ayer={[120]} antier={[215]}></CardSmall>
+          <CardSmall title="Activos" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Recuperados" class="col-span-1 m-auto" hoy={[210]} ayer={[250]} antier={[230]}></CardSmall>
+          <CardSmall title="Recuperados" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Muertos" class="col-span-1 m-auto" hoy={[180]} ayer={[155]} antier={[175]}></CardSmall>
+          <CardSmall title="Muertos" class="col-span-1 m-auto"></CardSmall>
         </div>
       </section>
       <footer class="w-full h-20 bg-gray-900 text-white flex items-center justify-center">
