@@ -11,6 +11,8 @@ let config = {
     appId: process.env.REACT_APP_APPID
 }
 
-const fire = firebase.initializeApp(config)
+if (!firebase.apps.length) firebase.initializeApp(config);
 
-export default fire
+//const firebase = firebase.initializeApp(config)
+
+export default firebase

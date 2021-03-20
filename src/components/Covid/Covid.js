@@ -1,35 +1,32 @@
-import {useEffect} from 'react';
+import { useState,useEffect} from 'react';
 import CardSmall from "../Cards/CardSmall";
 import CardPrincipal from "./../Cards/CardPrincipal";
 import getCountryCodeTotal from './CovidApi';
 import Form from "./../Forms/Form";
 import FormField from "./../Forms/FormField";
 import FormAction from "./../Forms/FormAction";
+import firebase from "../../FireBaseInit"
 
 function Covid (){
   const [search, setSearch]=useState('');
   const [country, setCountry]=useState('Honduras');
 
+ 
+
+  const addDateFirebase = () =>{
+    firebase.database().ref('covid/' + "02").set({
+      Conntrui:"Honduras",
+      email: "Hondi",
+      positive: 5
+    });
+  }
   useEffect(
-    function(){
-      
-    }
+    addDateFirebase
     ,[]
   );
 
   
-  const handlerPeticion = () =>{
-    
-    const dates = [
-        "2020-03-29",
-        "2020-03-30",
-        "2020-04-01",
-    ]
 
-    setTimeout(getBusqueda(dates[0]),1000);
-    setTimeout(getBusqueda(dates[1]),1000);
-    setTimeout(getBusqueda(dates[2]),1000);
-  }
 
   const getBusqueda = (_date)=>{
       fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date="+_date+"&name="+country+"", {
@@ -49,6 +46,18 @@ function Covid (){
     });
   }
 
+  const handlerPeticion = () =>{
+    
+    const dates = [
+        "2020-03-29",
+        "2020-03-30",
+        "2020-04-01",
+    ]
+
+    setTimeout(getBusqueda(dates[0]),1000);
+    setTimeout(getBusqueda(dates[1]),1000);
+    setTimeout(getBusqueda(dates[2]),1000);
+  }
   const prueba = ()=>{
     setSearch(search);
     console.log(search);
