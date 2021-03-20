@@ -7,78 +7,9 @@ import FormField from "./../Forms/FormField";
 import FormAction from "./../Forms/FormAction";
 
 function Covid (){
-  const [search, setSearch]=useState('');
-  const [country, setCountry]=useState('Honduras');
 
-  useEffect(
-    function(){
-      
-    }
-    ,[]
-  );
-
-  
-  const handlerPeticion = () =>{
-    
-    const dates = [
-        "2020-03-29",
-        "2020-03-30",
-        "2020-04-01",
-    ]
-
-    setTimeout(getBusqueda(dates[0]),1000);
-    setTimeout(getBusqueda(dates[1]),1000);
-    setTimeout(getBusqueda(dates[2]),1000);
-  }
-
-  const getBusqueda = (_date)=>{
-      fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date="+_date+"&name="+country+"", {
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-key": "ccf45b8aeemshd7ffebc60b30918p17bb1fjsn76a77575d0c6",
-      "x-rapidapi-host": "covid-19-data.p.rapidapi.com"
-    }
-    })
-    .then(response => {
-      console.log(response);
-      alert(response);
-    })
-    .catch(err => {
-      console.error(err);
-      alert(err);
-    });
-  }
-
-  const prueba = ()=>{
-    setSearch(search);
-    console.log(search);
-  }
-  const onChangeHandler = event => {
-    setCountry(event.target.value);
-    console.log(country);
-  };
-
-  const getPeticion = ()=>{
-    
-  }
   return (
     <section>
-      <section class="m-auto my-5 flex justify-center items-center">
-        <Form>
-          <input
-            type="text"
-            name="name"
-            onChange={onChangeHandler}
-            value={country}
-          />
-          <button 
-          onClick={handlerPeticion}
-
-          
-          >Buscar</button>
-        </Form>
-      </section>
-
       <section class="m-auto my-5 flex justify-center items-center">
         <Form>
           <FormField
