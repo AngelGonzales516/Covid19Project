@@ -11,40 +11,82 @@ import firebase from "../../FireBaseInit"
 function Covid (){
   const [search, setSearch]=useState('');
   const [country, setCountry]=useState('Honduras');
-/*
+
   const data ={
     country:"Honduras",
     code:"HN",
-    data:[{
-      datetime:"2020-04-20",
-      confirmed:"200",
-      recovered:"3000",
-      critical:"2000",
-      deaths:"20",
-    },{
-      datetime:"2020-04-08",
-      confirmed:"300",
-      recovered:"3400",
-      critical:"1999",
-      deaths:"10",
-    }]
-  
-  
-   }*/
+    data:{
 
-  const addDateFirebase = () =>{
+    },
+   }
 
-    firebase.database().ref('covid/'+ "04").set({
-      country:"Honduras",
-    code:"HN",
+  const addDateFirebase = (data) =>{
+
+    firebase.database().ref('covid/'+ country).set({
+     data
     });
   }
- 
 
-  useEffect(
-    addDateFirebase()
-    ,[]
-  ); 
+  const dataPrueba ={
+    
+      datetime:"2020-04-23",
+      confirmed:"220",
+      recovered:"4810",
+      critical:"299",
+      deaths:"52",
+    
+  }
+  const UpdateFirebase = (data) =>{
+   let covidAdd= firebase.database().ref('covid/'+country+'/data/data');
+   let NewCovidAdd= covidAdd.push('dato4');
+    NewCovidAdd.set({
+    data
+    });
+  }
+
+  const readDatabase = () =>{
+   // firebase.auth().currentUser.uid
+    const readFirebase = firebase.database().ref('covid/'+country+'/data/data')
+    readFirebase.on('value', (snapshot)=>{
+      const data = snapshot.val();
+      
+      console.log (data)
+      for (const properti in data){
+        const readDataFirebase =firebase.database().ref('covid/'+country+'/data/data/'+properti+'/data/recovered')
+        readDataFirebase.on ('value',(snapshots)=>{
+          const dataa = snapshots.val()
+          console.log(dataa)
+        })
+      }
+      data? console.log(true) : console.log(false)
+    })
+  }
+
+  const dataFireBase = () => {
+     //.orderByChild()
+    let valor;
+    let user = 'Honduras';
+firebase.database()
+ .ref('covid/')
+.orderByChild('covid/')
+ .equalTo(user)
+ .on('value', function(snapshot) {
+    console.log(snapshot.exists() ? valor=true  : valor = false);
+   }, function(error) {
+     console.log(error);
+   });
+    
+   if(valor==true)  console.log("si existe") 
+   else console.log("No existe")
+
+  }
+
+  useEffect(()=>{
+   // addDateFirebase(data)
+ //UpdateFirebase(dataPrueba)
+ //readDatabase();
+ dataFireBase()
+    },[]); 
 
 
   const getBusqueda = (date)=>{
