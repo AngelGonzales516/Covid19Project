@@ -1,7 +1,8 @@
-import { useState,useEffect} from 'react';
-import CardSmall from "../Cards/CardSmall";
+
+import React,{useState,useEffect} from 'react';
+import CardSmall from "./../Cards/Card";
 import CardPrincipal from "./../Cards/CardPrincipal";
-import getCountryCodeTotal from './CovidApi';
+//import getCountryCodeTotal from './CovidApi';
 import Form from "./../Forms/Form";
 import FormField from "./../Forms/FormField";
 import FormAction from "./../Forms/FormAction";
@@ -10,26 +11,46 @@ import firebase from "../../FireBaseInit"
 function Covid (){
   const [search, setSearch]=useState('');
   const [country, setCountry]=useState('Honduras');
-
- 
+/*
+  const data ={
+    country:"Honduras",
+    code:"HN",
+    data:[{
+      datetime:"2020-04-20",
+      confirmed:"200",
+      recovered:"3000",
+      critical:"2000",
+      deaths:"20",
+    },{
+      datetime:"2020-04-08",
+      confirmed:"300",
+      recovered:"3400",
+      critical:"1999",
+      deaths:"10",
+    }]
+  
+  
+   }*/
 
   const addDateFirebase = () =>{
-    firebase.database().ref('covid/' + "02").set({
-      Conntrui:"Honduras",
-      email: "Hondi",
-      positive: 5
+
+    firebase.database().ref('covid/'+ "04").set({
+      country:"Honduras",
+    code:"HN",
     });
   }
+ 
+
   useEffect(
-    addDateFirebase
+    addDateFirebase()
     ,[]
-  );
-
-  
+  ); 
 
 
-  const getBusqueda = (_date)=>{
-      fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date="+_date+"&name="+country+"", {
+  const getBusqueda = (date)=>{
+    //process.env.REACT_APP_RAPIAPI_API_KEY
+ //   "ccf45b8aeemshd7ffebc60b30918p17bb1fjsn76a77575d0c6"
+      fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date="+date+"&name="+country+"", {
     "method": "GET",
     "headers": {
       "x-rapidapi-key": "ccf45b8aeemshd7ffebc60b30918p17bb1fjsn76a77575d0c6",
@@ -44,6 +65,23 @@ function Covid (){
       console.error(err);
       alert(err);
     });
+/*
+    fetch("https://covid-19-data.p.rapidapi.com/report/country/name?date="+_date+"&name="+country+"&date-format=YYYY-MM-DD", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-key": "cb6af6a783msh263ea460296975cp116f73jsna01e410e5f6d",
+		"x-rapidapi-host": "covid-19-data.p.rapidapi.com"
+	}
+})
+.then(response => {
+	console.log(response);
+  alert(response)
+})
+.catch(err => {
+	console.error(err);
+  alert(err)
+});*/
+
   }
 
   const handlerPeticion = () =>{
@@ -106,7 +144,7 @@ function Covid (){
       </section>
 
       <section class="h-screen">
-        <CardPrincipal title="Panorama Actual" dataInfectados={[300]} dataMuertes={[200]} dataRecuperados={[75]} dataActivos={[420]}></CardPrincipal>
+        <CardPrincipal title="Panorama Actual"></CardPrincipal>
       </section>
       
       <section class="flex justify-center items-center">
@@ -115,16 +153,16 @@ function Covid (){
 
       <section class="grid grid-cols-1 md:grid-cols-2 align-center justify-center">
         <div class="flex justify-center items-center">
-          <CardSmall title="Confirmados" class="col-span-1 m-auto" hoy={[300]} ayer={[200]} antier={[150]}></CardSmall>
+          <CardSmall title="Confirmados" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Activos" class="col-span-1 m-auto" hoy={[400]} ayer={[120]} antier={[215]}></CardSmall>
+          <CardSmall title="Activos" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Recuperados" class="col-span-1 m-auto" hoy={[210]} ayer={[250]} antier={[230]}></CardSmall>
+          <CardSmall title="Recuperados" class="col-span-1 m-auto"></CardSmall>
         </div>
         <div class="flex justify-center items-center">
-          <CardSmall title="Muertos" class="col-span-1 m-auto" hoy={[180]} ayer={[155]} antier={[175]}></CardSmall>
+          <CardSmall title="Muertos" class="col-span-1 m-auto"></CardSmall>
         </div>
       </section>
       <footer class="w-full h-20 bg-gray-900 text-white flex items-center justify-center">
@@ -136,7 +174,6 @@ function Covid (){
 
 
 export default Covid;
-
 
 /*
 <section>
